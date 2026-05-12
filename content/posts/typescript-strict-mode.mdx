@@ -1,0 +1,37 @@
+---
+title: "TypeScript 严格模式下的前端工程基线"
+description: "如何设置 strict 组合选项，提前发现类型风险并减少线上缺陷。"
+date: "2026-05-08"
+tags:
+  - TypeScript
+  - Engineering
+  - Quality
+featured: false
+draft: false
+---
+
+## 严格模式不只是 `strict: true`
+
+很多项目只开了 `strict`，但以下选项同样关键：
+
+- `noUncheckedIndexedAccess`
+- `exactOptionalPropertyTypes`
+- `noImplicitOverride`
+
+## 这些选项解决什么问题
+
+### 下标访问风险
+
+`noUncheckedIndexedAccess` 会让数组和对象下标返回 `T | undefined`，强迫你处理空值分支。
+
+### 可选属性语义混乱
+
+`exactOptionalPropertyTypes` 区分“属性不存在”和“属性值为 undefined”，接口契约更清晰。
+
+### 继承覆写不透明
+
+`noImplicitOverride` 要求显式声明 `override`，避免父类签名变更时静默出错。
+
+## 团队级落地建议
+
+把 `typecheck` 作为 CI 必过项，不接受临时 `any` 绕过。短期会增加一些改造成本，但长期收益明显高于维护成本。
