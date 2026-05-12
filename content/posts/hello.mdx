@@ -1,0 +1,42 @@
+---
+title: "MDX 驱动博客发布流：从本地到 Vercel"
+description: "用 Git 与 CI/CD 管理内容发布，让技术写作与工程流程统一。"
+date: "2026-05-09"
+tags:
+  - MDX
+  - Vercel
+  - CI/CD
+featured: true
+draft: false
+---
+
+## MDX 的核心价值
+
+MDX 让技术内容与代码仓库共生：
+
+- 写作版本可追溯。
+- 发布自动化可复用。
+- 所有改动都能走 PR 审核流程。
+
+## 推荐发布链路
+
+这套链路稳定且可扩展：
+
+1. 本地编辑 `content/posts/*.mdx`。
+2. 提交到 GitHub，触发 GitHub Actions。
+3. CI 通过后合并 `main`。
+4. Vercel 自动拉取最新提交并部署。
+
+## 常见失误与规避
+
+### Frontmatter 缺失
+
+解决方法：使用 schema 校验，在构建期阻断发布。
+
+### 文章路径不统一
+
+解决方法：约定文件名即 slug，统一使用 `kebab-case`。
+
+### 本地通过、线上失败
+
+解决方法：本地跑 `pnpm ci`，保证验证逻辑和 CI 一致。
