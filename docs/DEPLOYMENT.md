@@ -35,13 +35,13 @@ CI 文件位置：`.github/workflows/ci.yml`
 
 建议开启分支保护：
 
-- `main` 只允许通过 CI 的 PR 合并。
-- 禁止直接推送 `main`。
+- `master` 只允许通过 CI 的 PR 合并。
+- 禁止直接推送 `master`。
 
 ## 5. 发布模型
 
 - `pull_request`：只做质量校验，Vercel 生成预览。
-- `main`：CI 通过后由 Vercel 自动发布生产版本。
+- `master`：CI 通过后由 Vercel 自动发布生产版本。
 
 ## 6. 内容更新方式
 

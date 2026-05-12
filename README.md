@@ -35,7 +35,7 @@ draft: boolean
 featured: boolean
 ```
 
-3. 提交代码到 GitHub，PR 通过 CI 后合并到 `main`。
+3. 提交代码到 GitHub，PR 通过 CI 后合并到 `master`。
 4. Vercel 自动拉取最新提交并发布。
 
 ## Scripts
