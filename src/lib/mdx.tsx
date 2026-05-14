@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import type { ComponentPropsWithoutRef } from "react";
 
 import { compileMDX } from "next-mdx-remote/rsc";
@@ -26,6 +27,13 @@ const mdxComponents = {
   ),
   a: (props: ComponentPropsWithoutRef<"a">) => (
     <a className="text-zinc-900 underline decoration-zinc-300 underline-offset-4" {...props} />
+  ),
+  img: (props: ComponentPropsWithoutRef<"img">) => (
+    <img
+      className={cn("my-6 h-auto max-w-full rounded-xl border border-zinc-200", props.className)}
+      alt={props.alt ?? ""}
+      {...props}
+    />
   ),
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote className="my-6 border-l-2 border-zinc-300 pl-4 text-zinc-600 italic" {...props} />
