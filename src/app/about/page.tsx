@@ -1,37 +1,59 @@
 import type { Metadata } from "next";
+import type { Route } from "next";
+import Link from "next/link";
 
 import { SectionTitle } from "@/components/common/section-title";
+import { MotionReveal } from "@/components/motion/reveal";
+import { getAboutSections } from "@/lib/about-sections";
+import { renderMdx } from "@/lib/mdx";
 
 export const metadata: Metadata = {
   title: "关于",
   description: "博客作者简介与写作原则。",
 };
 
-const principles = [
-  "优先写可复现、可落地的工程实践，不写空泛经验谈。",
-  "所有示例默认遵循 TypeScript 严格模式与可维护架构。",
-  "重点关注团队协作效率，而不是单点技巧堆叠。",
-];
+const toneStyles = {
+  spotlight:
+    "relative overflow-hidden rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-white via-zinc-50 to-sky-50 p-8 md:p-11",
+  panel: "rounded-3xl border border-zinc-200 bg-zinc-50/70 p-7 md:p-10",
+  plain: "rounded-3xl border border-zinc-200/80 bg-white p-7 md:p-10",
+} as const;
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const sections = await getAboutSections();
+  const renderedSections = await Promise.all(
+    sections.map(async (section) => ({
+      ...section,
+      content: await renderMdx(section.content),
+    })),
+  );
+
   return (
     <div className="space-y-8">
-      <SectionTitle
-        eyebrow="About"
-        title="关于这个博客"
-        description="这是一个面向前端工程师的技术博客，聚焦长期可维护的软件工程实践。"
-      />
-      <div className="rounded-2xl border border-zinc-200 bg-white p-6">
-        <p className="text-zinc-600">
-          作者定位为前端工程负责人视角，内容覆盖 Next.js、TypeScript、组件体系、测试体系、CI/CD
-          与工程规范建设。
-        </p>
-        <ul className="mt-5 list-disc space-y-2 pl-5 text-zinc-700">
-          {principles.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </div>
+      {renderedSections.map((section, index) => (
+        <MotionReveal key={section.slug} as="section" delay={index * 0.04}>
+          <div className={toneStyles[section.tone]}>
+            {section.tone === "spotlight" ? (
+              <div className="pointer-events-none absolute -top-16 -right-8 h-44 w-44 rounded-full bg-sky-200/40 blur-2xl" />
+            ) : null}
+            <SectionTitle
+              title={section.title}
+              className="relative"
+              {...(section.eyebrow ? { eyebrow: section.eyebrow } : {})}
+              {...(section.description ? { description: section.description } : {})}
+            />
+            <div className="relative mt-6 max-w-4xl">{section.content}</div>
+            {section.ctaLabel && section.ctaHref ? (
+              <Link
+                href={section.ctaHref as Route}
+                className="mt-2 inline-flex rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50"
+              >
+                {section.ctaLabel}
+              </Link>
+            ) : null}
+          </div>
+        </MotionReveal>
+      ))}
     </div>
   );
 }
