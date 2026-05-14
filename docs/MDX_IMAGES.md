@@ -28,7 +28,23 @@
 - 不要把图片直接放在 `content/*.mdx` 同目录后再指望自动解析。
 - 优先用 `public/`，因为当前项目的 MDX 是以字符串方式编译的。
 
-## 4. 推荐结构
+## 4. 控制大小
+
+最直接的方式是用 HTML 写法：
+
+```mdx
+<img src="/posts/my-article/cover.png" alt="封面图" width="720" />
+```
+
+也可以用 `className` 控制宽度：
+
+```mdx
+<img src="/posts/my-article/cover.png" alt="封面图" className="w-full max-w-xl" />
+```
+
+如果想要固定宽高，就同时写 `width` 和 `height`。
+
+## 5. 推荐结构
 
 ```text
 public/
@@ -39,7 +55,7 @@ public/
       step-2.png
 ```
 
-## 5. 备注
+## 6. 备注
 
 - 当前项目已给 MDX 图片统一加了基础样式。
 - 如果你后面要做图注，可以直接用 `<figure>` + `<figcaption>`。

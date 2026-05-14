@@ -7,6 +7,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
+import { Callout, Figure, Stats, Timeline } from "@/components/mdx/mdx-primitives";
 import { cn } from "@/lib/utils";
 
 const mdxComponents = {
@@ -28,10 +29,10 @@ const mdxComponents = {
   a: (props: ComponentPropsWithoutRef<"a">) => (
     <a className="text-zinc-900 underline decoration-zinc-300 underline-offset-4" {...props} />
   ),
-  img: (props: ComponentPropsWithoutRef<"img">) => (
+  img: ({ className, alt, ...props }: ComponentPropsWithoutRef<"img">) => (
     <img
-      className={cn("my-6 h-auto max-w-full rounded-xl border border-zinc-200", props.className)}
-      alt={props.alt ?? ""}
+      alt={alt ?? ""}
+      className={cn("my-6 h-auto max-w-full rounded-xl border border-zinc-200", className)}
       {...props}
     />
   ),
@@ -53,6 +54,10 @@ const mdxComponents = {
       {...props}
     />
   ),
+  Callout,
+  Figure,
+  Stats,
+  Timeline,
 };
 
 export async function renderMdx(source: string) {

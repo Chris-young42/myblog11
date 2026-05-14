@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { BlogCard } from "@/components/blog/blog-card";
+import { PostActions } from "@/components/blog/post-actions";
 import { ReadingProgress } from "@/components/blog/reading-progress";
 import { TableOfContents } from "@/components/blog/table-of-contents";
-import { getAdjacentPosts, getAllPostSummaries, getPostBySlug } from "@/lib/posts";
+import { TagChip } from "@/components/blog/tag-chip";
+import { getAdjacentPosts, getAllPostSummaries, getPostBySlug, getRelatedPosts } from "@/lib/posts";
 import { renderMdx } from "@/lib/mdx";
 import { siteConfig } from "@/lib/site-config";
 import { formatDate } from "@/lib/utils";
@@ -54,6 +57,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
   const mdxContent = await renderMdx(post.content);
   const adjacent = await getAdjacentPosts(post.slug);
+  const relatedPosts = await getRelatedPosts(post.slug);
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -84,6 +88,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           {post.title}
         </h1>
         <p className="max-w-3xl text-lg text-zinc-600">{post.description}</p>
+        <div className="flex flex-wrap gap-2 pt-2">
+          {post.tags.map((tag) => (
+            <TagChip key={tag} tag={tag} />
+          ))}
+        </div>
+        <PostActions url={`${siteConfig.siteUrl}${post.url}`} />
       </header>
 
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
@@ -116,6 +126,23 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           <div />
         )}
       </section>
+
+      {relatedPosts.length > 0 ? (
+        <section className="space-y-6 border-t border-zinc-200 pt-8">
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs tracking-[0.14em] text-zinc-500 uppercase">Related</p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight text-zinc-900">推荐阅读</h2>
+            </div>
+            <p className="hidden text-sm text-zinc-500 md:block">基于标签和发布时间自动推荐</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {relatedPosts.map((item) => (
+              <BlogCard key={item.slug} post={item} />
+            ))}
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }

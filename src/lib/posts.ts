@@ -181,3 +181,29 @@ export async function getAdjacentPosts(slug: string): Promise<{
     next: posts[index - 1] ?? null,
   };
 }
+
+export async function getRelatedPosts(slug: string, limit = 3): Promise<PostSummary[]> {
+  const posts = await getAllPostSummaries();
+  const current = posts.find((post) => post.slug === slug);
+
+  if (!current) {
+    return [];
+  }
+
+  const scored = posts
+    .filter((post) => post.slug !== slug)
+    .map((post) => {
+      const sharedTags = post.tags.filter((tag) => current.tags.includes(tag)).length;
+      const daysSinceCurrent =
+        Math.abs(Date.parse(current.date) - Date.parse(post.date)) / 86400000;
+      const recencyScore = Math.max(0, 20 - daysSinceCurrent);
+
+      return {
+        post,
+        score: sharedTags * 10 + recencyScore,
+      };
+    })
+    .sort((a, b) => b.score - a.score || Date.parse(b.post.date) - Date.parse(a.post.date));
+
+  return scored.slice(0, limit).map(({ post }) => post);
+}
