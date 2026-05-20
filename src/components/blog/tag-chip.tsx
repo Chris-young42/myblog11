@@ -15,7 +15,7 @@ export function TagChip({ tag }: TagChipProps) {
     <Link href={href}>
       <Badge
         variant="outline"
-        className="border-zinc-300 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
+        className="cursor-pointer border-zinc-300 bg-white text-zinc-600 transition-colors hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700"
       >
         {tag}
       </Badge>

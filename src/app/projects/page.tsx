@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 const toneStyles = {
   spotlight:
-    "relative overflow-hidden rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-white via-zinc-50 to-emerald-50 p-8 md:p-11",
-  panel: "rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm",
-  plain: "rounded-3xl border border-zinc-200/80 bg-zinc-50/50 p-6",
+    "relative overflow-hidden rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-white via-zinc-50 to-blue-50 p-8 shadow-sm md:p-11",
+  panel: "rounded-3xl border border-zinc-200/80 bg-white p-6 shadow-sm",
+  plain: "rounded-3xl border border-zinc-200/80 bg-zinc-50/70 p-6 shadow-sm",
 } as const;
 
 export default async function ProjectsPage() {
@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
         <MotionReveal as="section">
           <div className={toneStyles[overview.tone]}>
             {overview.tone === "spotlight" ? (
-              <div className="pointer-events-none absolute -top-16 -right-8 h-44 w-44 rounded-full bg-emerald-200/40 blur-2xl" />
+              <div className="pointer-events-none absolute -top-16 -right-8 h-44 w-44 rounded-full bg-blue-200/50 blur-2xl" />
             ) : null}
             <SectionTitle
               title={overview.title}
@@ -49,7 +49,7 @@ export default async function ProjectsPage() {
             {overview.ctaLabel && overview.ctaHref ? (
               <Link
                 href={overview.ctaHref as Route}
-                className="mt-2 inline-flex rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50"
+                className="mt-2 inline-flex cursor-pointer rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100"
               >
                 {overview.ctaLabel}
               </Link>
@@ -86,7 +86,7 @@ export default async function ProjectsPage() {
                   {project.stack.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full border border-zinc-300 px-2.5 py-1 text-xs text-zinc-600"
+                      className="rounded-full border border-zinc-300 bg-white px-2.5 py-1 text-xs text-zinc-600"
                     >
                       {item}
                     </span>
@@ -96,7 +96,7 @@ export default async function ProjectsPage() {
                 {project.ctaLabel && project.ctaHref ? (
                   <Link
                     href={project.ctaHref as Route}
-                    className="mt-4 inline-flex rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50"
+                    className="mt-4 inline-flex cursor-pointer rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100"
                   >
                     {project.ctaLabel}
                   </Link>

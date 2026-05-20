@@ -14,17 +14,17 @@ export async function SiteHeader() {
   });
 
   return (
-    <header className="sticky top-0 z-40 border-b border-zinc-200/70 bg-white/70 backdrop-blur-xl">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
+    <header className="sticky top-4 z-40 mx-4 rounded-2xl border border-zinc-200/80 bg-white/85 shadow-sm backdrop-blur-xl lg:mx-8">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-3 lg:px-7">
         <div className="flex items-center gap-4">
           <Link
             href="/"
-            className="text-sm font-semibold tracking-[0.22em] text-zinc-900 uppercase"
+            className="text-base leading-none font-semibold tracking-[0.08em] text-zinc-900"
           >
             {siteConfig.name}
           </Link>
-          <span className="hidden rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] tracking-[0.12em] text-zinc-500 uppercase md:inline-flex">
-            MDX · Static
+          <span className="hidden rounded-full border border-blue-200 bg-blue-50 px-2.5 py-1 text-[11px] font-medium tracking-[0.1em] text-blue-700 uppercase md:inline-flex">
+            Motion Blog
           </span>
         </div>
 
@@ -33,7 +33,7 @@ export async function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              className="rounded-full px-3 py-1.5 text-sm text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-900"
+              className="cursor-pointer rounded-full px-3 py-1.5 text-sm font-medium text-zinc-600 transition-colors hover:bg-blue-50 hover:text-blue-700"
             >
               {item.label}
             </Link>

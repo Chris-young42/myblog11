@@ -1,12 +1,26 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Caveat, Quicksand } from "next/font/google";
 
 import { SiteAtmosphere } from "@/components/layout/site-atmosphere";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { SiteShell } from "@/components/layout/site-shell";
 import { siteConfig } from "@/lib/site-config";
 
 import "./globals.css";
+
+const displayFont = Caveat({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["600", "700"],
+});
+
+const sansFont = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
@@ -31,14 +45,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="zh-CN" className="h-full antialiased">
+    <html
+      lang="zh-CN"
+      className={`${displayFont.variable} ${sansFont.variable} h-full antialiased`}
+    >
       <body className="relative min-h-full overflow-x-hidden bg-background text-foreground">
         <SiteAtmosphere />
-        <SiteHeader />
-        <main className="relative z-10 mx-auto w-full max-w-6xl flex-1 px-6 py-10 lg:px-8">
+        <SiteShell header={<SiteHeader />} footer={<SiteFooter />}>
           {children}
-        </main>
-        <SiteFooter />
+        </SiteShell>
       </body>
     </html>
   );

@@ -62,7 +62,7 @@ export function SiteCommandPalette({ entries }: SiteCommandPaletteProps) {
         type="button"
         variant="outline"
         size="sm"
-        className="hidden border-zinc-200 bg-white/80 text-zinc-600 shadow-sm lg:inline-flex"
+        className="hidden cursor-pointer border-zinc-200 bg-white/80 text-zinc-600 shadow-sm hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 lg:inline-flex"
         onClick={() => setOpen(true)}
       >
         <SearchIcon className="size-4" />
@@ -74,7 +74,7 @@ export function SiteCommandPalette({ entries }: SiteCommandPaletteProps) {
         type="button"
         variant="ghost"
         size="icon-sm"
-        className="inline-flex border border-zinc-200 bg-white/80 text-zinc-600 shadow-sm lg:hidden"
+        className="inline-flex cursor-pointer border border-zinc-200 bg-white/80 text-zinc-600 shadow-sm hover:border-blue-200 hover:bg-blue-50 hover:text-blue-700 lg:hidden"
         onClick={() => setOpen(true)}
       >
         <SearchIcon className="size-4" />

@@ -27,7 +27,7 @@ const mdxComponents = {
     <ol className="mb-5 list-decimal space-y-2 pl-6 text-zinc-700" {...props} />
   ),
   a: (props: ComponentPropsWithoutRef<"a">) => (
-    <a className="text-zinc-900 underline decoration-zinc-300 underline-offset-4" {...props} />
+    <a className="text-blue-700 underline decoration-blue-300 underline-offset-4" {...props} />
   ),
   img: ({ className, alt, ...props }: ComponentPropsWithoutRef<"img">) => (
     <img
@@ -37,7 +37,7 @@ const mdxComponents = {
     />
   ),
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
-    <blockquote className="my-6 border-l-2 border-zinc-300 pl-4 text-zinc-600 italic" {...props} />
+    <blockquote className="my-6 border-l-2 border-blue-300 pl-4 text-zinc-600 italic" {...props} />
   ),
   pre: (props: ComponentPropsWithoutRef<"pre">) => (
     <pre

@@ -6,10 +6,11 @@ export const siteConfig = {
   description: "聚焦 Next.js、TypeScript、工程化与现代前端架构的技术博客，采用 MDX 驱动内容发布。",
   siteUrl: (process.env.NEXT_PUBLIC_SITE_URL ?? fallbackSiteUrl).replace(/\/$/, ""),
   nav: [
-    { href: "/", label: "首页" },
+    { href: "/home", label: "首页" },
     { href: "/blog", label: "博客" },
     { href: "/projects", label: "项目" },
     { href: "/about", label: "关于" },
+    { href: "/hi", label: "展示页" },
   ],
 } as const;
 

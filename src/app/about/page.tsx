@@ -14,9 +14,9 @@ export const metadata: Metadata = {
 
 const toneStyles = {
   spotlight:
-    "relative overflow-hidden rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-white via-zinc-50 to-sky-50 p-8 md:p-11",
-  panel: "rounded-3xl border border-zinc-200 bg-zinc-50/70 p-7 md:p-10",
-  plain: "rounded-3xl border border-zinc-200/80 bg-white p-7 md:p-10",
+    "relative overflow-hidden rounded-3xl border border-zinc-200/80 bg-gradient-to-br from-white via-zinc-50 to-blue-50 p-8 shadow-sm md:p-11",
+  panel: "rounded-3xl border border-zinc-200/80 bg-zinc-50/80 p-7 shadow-sm md:p-10",
+  plain: "rounded-3xl border border-zinc-200/80 bg-white/90 p-7 shadow-sm md:p-10",
 } as const;
 
 export default async function AboutPage() {
@@ -34,7 +34,7 @@ export default async function AboutPage() {
         <MotionReveal key={section.slug} as="section" delay={index * 0.04}>
           <div className={toneStyles[section.tone]}>
             {section.tone === "spotlight" ? (
-              <div className="pointer-events-none absolute -top-16 -right-8 h-44 w-44 rounded-full bg-sky-200/40 blur-2xl" />
+              <div className="pointer-events-none absolute -top-16 -right-8 h-44 w-44 rounded-full bg-blue-200/50 blur-2xl" />
             ) : null}
             <SectionTitle
               title={section.title}
@@ -46,7 +46,7 @@ export default async function AboutPage() {
             {section.ctaLabel && section.ctaHref ? (
               <Link
                 href={section.ctaHref as Route}
-                className="mt-2 inline-flex rounded-full border border-zinc-300 bg-white px-5 py-2.5 text-sm text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50"
+                className="mt-2 inline-flex cursor-pointer rounded-full border border-blue-200 bg-blue-50 px-5 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100"
               >
                 {section.ctaLabel}
               </Link>

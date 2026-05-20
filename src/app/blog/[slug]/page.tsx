@@ -105,10 +105,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         {adjacent.prev ? (
           <Link
             href={adjacent.prev.url}
-            className="rounded-2xl border border-zinc-200 p-5 hover:bg-zinc-50"
+            className="cursor-pointer rounded-2xl border border-zinc-200 p-5 transition-colors hover:border-blue-200 hover:bg-blue-50/60"
           >
             <p className="text-xs tracking-[0.12em] text-zinc-500 uppercase">上一篇</p>
-            <p className="mt-2 text-zinc-900">{adjacent.prev.title}</p>
+            <p className="mt-2 text-zinc-900 transition-colors hover:text-blue-700">
+              {adjacent.prev.title}
+            </p>
           </Link>
         ) : (
           <div />
@@ -117,10 +119,12 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
         {adjacent.next ? (
           <Link
             href={adjacent.next.url}
-            className="rounded-2xl border border-zinc-200 p-5 text-right hover:bg-zinc-50"
+            className="cursor-pointer rounded-2xl border border-zinc-200 p-5 text-right transition-colors hover:border-blue-200 hover:bg-blue-50/60"
           >
             <p className="text-xs tracking-[0.12em] text-zinc-500 uppercase">下一篇</p>
-            <p className="mt-2 text-zinc-900">{adjacent.next.title}</p>
+            <p className="mt-2 text-zinc-900 transition-colors hover:text-blue-700">
+              {adjacent.next.title}
+            </p>
           </Link>
         ) : (
           <div />
